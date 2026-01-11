@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduManager - Accueil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">
+                <i class="bi bi-mortarboard-fill"></i> EduManager
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/programmes}">Programmes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/inscription}">Inscription</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}">Connexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-primary text-white py-5 mb-4">
+        <div class="container text-center">
+            <h1 class="display-4"><i class="bi bi-mortarboard-fill"></i> EduManager</h1>
+            <p class="lead">Système professionnel de gestion des centres de formation</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-book-fill text-primary fs-1"></i>
+                        <h5 class="card-title mt-3">Programmes de Formation</h5>
+                        <p class="card-text">Découvrez nos programmes de formation professionnelle adaptés à vos besoins.</p>
+                        <a th:href="@{/programmes}" class="btn btn-primary">Voir les programmes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-person-plus-fill text-success fs-1"></i>
+                        <h5 class="card-title mt-3">Inscription en Ligne</h5>
+                        <p class="card-text">Inscrivez-vous facilement à nos formations en quelques clics.</p>
+                        <a th:href="@{/inscription}" class="btn btn-success">S'inscrire</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-graph-up-arrow text-info fs-1"></i>
+                        <h5 class="card-title mt-3">Suivi Personnalisé</h5>
+                        <p class="card-text">Bénéficiez d'un suivi complet de votre parcours de formation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="mb-4">Programmes Populaires</h2>
+        <div class="row">
+            <div th:each="programme : ${programmes}" class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${programme.nom}">Programme</h5>
+                        <p class="card-text" th:text="${programme.description}">Description</p>
+                        <p class="text-muted">
+                            <i class="bi bi-clock"></i> Durée: <span th:text="${programme.duree}"></span> mois
+                        </p>
+                        <a th:href="@{/inscription}" class="btn btn-outline-primary">S'inscrire</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light text-center py-3 mt-5">
+        <div class="container">
+            <p class="text-muted mb-0">&copy; 2024 EduManager - Système de gestion des centres de formation</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - EduManager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">
+                <i class="bi bi-mortarboard-fill"></i> EduManager
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/programmes}">Programmes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/inscription}">Inscription</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}">Connexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="mb-4">Inscription en Ligne</h1>
+                
+                <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <span th:text="${message}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <span th:text="${message}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+
+                <form th:action="@{/inscription}" th:object="${apprenant}" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Informations Personnelles</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="nom" class="form-label">Nom <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="nom" th:field="*{nom}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="prenom" class="form-label">Prénom <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="prenom" th:field="*{prenom}" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telephone" class="form-label">Téléphone <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="telephone" th:field="*{telephone}" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h5 class="mb-0">Choix de Formation</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="cohorteId" class="form-label">Cohorte <span class="text-danger">*</span></label>
+                                <select class="form-select" id="cohorteId" name="cohorteId" required>
+                                    <option value="">Sélectionnez une cohorte</option>
+                                    <option th:each="cohorte : ${cohortes}" 
+                                            th:value="${cohorte.id}" 
+                                            th:text="${cohorte.nom + ' (' + cohorte.programme.nom + ')'}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-check-circle"></i> Soumettre l'inscription
+                        </button>
+                        <a th:href="@{/}" class="btn btn-secondary btn-lg ms-2">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light text-center py-3 mt-5">
+        <div class="container">
+            <p class="text-muted mb-0">&copy; 2024 EduManager - Système de gestion des centres de formation</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
