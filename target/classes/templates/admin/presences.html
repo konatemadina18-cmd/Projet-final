@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Présences - EduManager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/admin/dashboard}">EduManager</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid my-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Présences</h1>
+            <a th:href="@{/admin/presences/new}" class="btn btn-primary">Nouvelle Présence</a>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Apprenant</th>
+                            <th>Date</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="presence : ${presences}">
+                            <td th:text="${presence.id}">1</td>
+                            <td th:text="${presence.inscription.apprenant.nomComplet}">Apprenant</td>
+                            <td th:text="${#temporals.format(presence.date, 'dd/MM/yyyy')}">Date</td>
+                            <td th:text="${presence.statut}">Statut</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
